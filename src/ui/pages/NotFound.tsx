@@ -5,21 +5,19 @@ import { css } from '@emotion/css';
 /**
  * Component props
  */
-type GameProps = {
-    bombs: number;
-    width: number;
-    height: number;
+type NotFoundProps = {
+    // Empty
 };
 
 /**
- * Game
+ * NotFound
  * React Functional Component
  *
  */
-export const Game: React.FC<GameProps> = () => {
+export const NotFound: React.FC<NotFoundProps> = () => {
     const styles = useStyles(makeStyles);
-    console.log(styles);
-    return <></>;
+
+    return <div className={styles.container}></div>;
 };
 
 const makeStyles = () => ({

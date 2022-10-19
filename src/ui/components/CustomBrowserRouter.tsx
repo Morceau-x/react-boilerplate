@@ -7,22 +7,26 @@ export const History = createBrowserHistory({ window });
 export const HistoryProvider = React.createContext(History);
 
 const CustomInternalBrowserRouter: React.FC<BrowserRouterProps> = ({ basename, children }) => {
-	let history = useContext(HistoryProvider);
+    const history = useContext(HistoryProvider);
 
-	let [state, setState] = React.useState({
-		action: history.action,
-		location: history.location,
-	});
+    const [state, setState] = React.useState({
+        action: history.action,
+        location: history.location,
+    });
 
-	React.useLayoutEffect(() => history.listen(setState), [history]);
+    React.useLayoutEffect(() => history.listen(setState), [history]);
 
-	return <Router basename={basename} children={children} location={state.location} navigationType={state.action} navigator={history} />;
+    return (
+        <Router basename={basename} location={state.location} navigationType={state.action} navigator={history}>
+            {children}
+        </Router>
+    );
 };
 
 export const CustomBrowserRouter: React.FC<BrowserRouterProps> = (props) => {
-	return (
-		<HistoryProvider.Provider value={History}>
-			<CustomInternalBrowserRouter {...props} />
-		</HistoryProvider.Provider>
-	);
+    return (
+        <HistoryProvider.Provider value={History}>
+            <CustomInternalBrowserRouter {...props} />
+        </HistoryProvider.Provider>
+    );
 };

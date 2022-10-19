@@ -1,34 +1,34 @@
 {
-	"compilerOptions": {
-		"strict": true,
-		"alwaysStrict": true,
-		"strictNullChecks": true,
-		"strictBindCallApply": true,
-		"strictFunctionTypes": true,
-		"strictPropertyInitialization": true,
-		"noImplicitAny": true,
-		"noImplicitThis": true,
-		"useUnknownInCatchVariables": true,
+    "compilerOptions": {
+        "strict": true,
+        "alwaysStrict": true,
+        "strictNullChecks": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "useUnknownInCatchVariables": true,
 
-		"noFallthroughCasesInSwitch": true,
-		"exactOptionalPropertyTypes": false,
-		"noImplicitOverride": true,
-		"noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "exactOptionalPropertyTypes": false,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
 
-		"module": "commonjs",
+        "module": "commonjs",
 
-		"rootDir": "src",
-		"outDir": "dist",
+        "rootDir": "src",
+        "outDir": "dist",
 
-		"removeComments": true,
-		"jsx": "react",
+        "removeComments": true,
+        "jsx": "react",
 
-		"target": "es6",
-		"sourceMap": true,
+        "target": "es6",
+        "sourceMap": true,
 
-		"esModuleInterop": true,
-		"baseUrl": "src/"
-	},
-	"include": ["src/**/*", "typing.d.ts"],
-	"exclude": ["node_modules", "**/*.spec.ts"]
+        "esModuleInterop": true,
+        "baseUrl": "src/"
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
 }

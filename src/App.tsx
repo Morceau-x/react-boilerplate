@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './Store';
 import { createRoot } from 'react-dom/client';
@@ -9,26 +9,38 @@ import { injectGlobal } from '@emotion/css';
 import { Fonts } from './assets/fonts/Fonts';
 import { AppRoutes } from './Routes';
 import { CustomBrowserRouter } from './ui/components/CustomBrowserRouter';
+import { useAppDispatch } from './redux/ReduxTypes';
+import { TestSlice } from './redux/Test';
 
 const App: React.FC = () => {
-	useWindowDimensionsChange();
-	return (
-		<Translation>
-			<CustomBrowserRouter>
-				<AppRoutes />
-			</CustomBrowserRouter>
-		</Translation>
-	);
+    useWindowDimensionsChange();
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(TestSlice.actions.actionUsedBySaga({ value: 'example' }));
+    }, []);
+
+    return (
+        <Translation>
+            <CustomBrowserRouter>
+                <AppRoutes />
+            </CustomBrowserRouter>
+        </Translation>
+    );
 };
 
-createRoot(document.getElementById('app')!, {
-	onRecoverableError: Logger.warnValueDebug('App'),
-	identifierPrefix: 'react',
-}).render(
-	<Provider store={store}>
-		<App />
-	</Provider>
-);
+const rootElement = document.getElementById('app');
+
+if (rootElement) {
+    createRoot(rootElement, {
+        onRecoverableError: Logger.warnValueDebug('App'),
+        identifierPrefix: 'react',
+    }).render(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
+}
 
 injectGlobal`
 	@font-face {
@@ -56,3 +68,11 @@ injectGlobal`
 		overflow: hidden;
 	}
 `;
+
+export const test =
+    process.env.NODE_ENV === 'test'
+        ? {
+              rootElement,
+              App,
+          }
+        : {};
